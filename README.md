@@ -278,6 +278,46 @@ mode
 Press enter to keep the current choice[*], or type selection number: 4
 ```
 
+### Exposee Task Switcher (Simple)
+
+A full-screen Exposé-style standalone task switcher for X11. It's most commonly known by Mac OS X's name for it - Exposé.
+Skippy-XD — a full-screen task-switcher for X11.
+
+```
+sudo apt-get install -y libgif-dev
+git clone https://github.com/richardgv/skippy-xd.git
+```
+
+To run the daemon, use the following command: 
+```
+skippy-xd --start-daemon 
+```
+
+If for whatever reason you need to cleanly stop the running daemon, do this: 
+```
+skippy-xd --stop-daemon 
+```
+
+Once the daemon is running you can use the following command to activate it: 
+```
+skippy-xd --activate-window-picker
+skippy-xd --toggle-window-picker 
+```
+
+However, sometimes pressing the Return key to run this last command also causes the window to be selected, so it is probably more effective in testing to do this: 
+```
+sleep 1 && skippy-xd --activate-window-picker 
+```
+This will wait 1 second, then activate the picker.
+
+Configuracion:
+
+```
+mkdir -p ~/.config/skippy-xd
+cp skippy-xd.sample.rc ~/.config/skippy-xd/skippy-xd.rc
+```
+
+
 ### VNC Server
 
 I got it working using x11vnc rather than tightvncserver or vncserver
@@ -553,11 +593,19 @@ https://github.com/JoseExposito/touchegg
         </gesture>
 		        
         <gesture type="DRAG" fingers="3" direction="LEFT">
-            <action type="SEND_KEYS">Alt+Control+Left</action>
+            <action type="SEND_KEYS">Alt+Control+Right</action>
         </gesture>
         
         <gesture type="DRAG" fingers="3" direction="RIGHT">
-            <action type="SEND_KEYS">Alt+Control+Right</action>
+            <action type="SEND_KEYS">Alt+Control+Left</action>
+        </gesture>
+
+        <gesture type="DRAG" fingers="3" direction="UP">
+            <action type="SEND_KEYS">Control+Tab</action>
+        </gesture>
+
+        <gesture type="DRAG" fingers="3" direction="DOWN">
+            <action type="SEND_KEYS">Control+Tab</action>
         </gesture>
 
     </application>
