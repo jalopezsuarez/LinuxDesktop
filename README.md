@@ -623,14 +623,6 @@ MacOS Keybaord Shorcuts style:
 ```
 deepin-scrot				>>	Shift+Ctrl+$
 skippy-xd --toggle-window-picker	>>	Ctrl+Tab
-xdotool getactivewindow key End		>>	Ctrl+Right	
-xdotool getactivewindow key Home	>>	Ctrl+Left
-```
-
-### XDotTool emulate Ctrl+Home/End MacOS
-
-```
-sudo apt-get install xdotool
 ```
 
 ### Minimize All-Window Command
