@@ -132,6 +132,12 @@ sudo chown administrator:administrator -R /opt/compartido
 sudo chmod -R 777 /opt/compartido
 ```
 
+Permitir acceso a los archivos creados desde SMB:
+```
+sudo groupadd nobody
+sudo usermod -a -G nobody administrator
+```
+
 ### Impresoras Protocolo LPD/LPR
 
 Instalar el sistema CUPS para la gestion de impresoras:
