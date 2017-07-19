@@ -616,8 +616,26 @@ https://github.com/JoseExposito/touchegg
 </touchégg>
 ```
 
+### MacOS Keyboard Shortcuts 
+
+MacOS Keybaord Shorcuts style:
+
+```
+deepin-scrot				>>	Shift+Ctrl+$
+skippy-xd --toggle-window-picker	>>	Ctrl+Tab
+xdotool getactivewindow key End		>>	Ctrl+Right	
+xdotool getactivewindow key Home	>>	Ctrl+Left
+```
+
+### XDotTool emulate Ctrl+Home/End MacOS
+
+```
+sudo apt-get install xdotool
+```
+
 ### Minimize All-Window Command
 
+Use command Ctrl+D to show desktop:
 ```
 sudo apt-get install -y wmctrl
 ```
