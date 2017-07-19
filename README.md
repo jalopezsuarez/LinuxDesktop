@@ -18,7 +18,7 @@ sudo apt-get update
 
 Se creara un usuario para uso de sistema.
 ```
-pi
+administrator
 ```
 
 Se instala el sistema de acceso root con usuarios normales.
@@ -26,11 +26,11 @@ Se instala el sistema de acceso root con usuarios normales.
 apt-get install -y sudo
 ```
 
-Se agrega al usuario `pi` al grupo de administradores de sistema.X
+Se agrega al usuario `administrator` al grupo de administradores de sistema.X
 ```
-sudo adduser pi sudo
-sudo usermod -a -G sudo pi
-sudo sh -c "echo 'pi ALL=NOPASSWD: ALL' >> /etc/sudoers"
+sudo adduser administrator sudo
+sudo usermod -a -G sudo administrator
+sudo sh -c "echo 'administrator ALL=NOPASSWD: ALL' >> /etc/sudoers"
 ```
 
 ### Vim Editor (Fix Arrowkeys)
@@ -60,14 +60,14 @@ sudo apt-get install -y intltool flex bison libdbus-glib-1-dev libglu1-mesa-dev 
 ```
 
 ### Automount USB
-Cuando se inserte un pendrive o una unidad USB en el dispositivo RaspberryPi, este se montara automáticamente utilizando la siguiente configuración. Ademas podemos añadir soporte para NTFS y ExFAT de manera nativa.
+Cuando se inserte un pendrive o una unidad USB en el equipo, este se montara automáticamente utilizando la siguiente configuración. Ademas podemos añadir soporte para NTFS y ExFAT de manera nativa.
 
 ```
 sudo apt-get install -y usbmount ntfs-3g exfat-fuse
 ```
 
 ### SAMBA 
-Share directories as Network Shared Folder using Windows SMB standard. Install Samba Raspberry Pi (Debian Jessie / Raspberry Pi3).
+Share directories as Network Shared Folder using Windows SMB standard. Install Samba PC (Debian / Xubuntu).
 ```
 sudo apt-get install -y samba samba-common-bin
 ```
@@ -85,9 +85,9 @@ wins support = yes
 usershare allow guests = no
 ```
 
-Set samba password for the default pi user (usually use default pi password on system/ssh `raspberry`):
+Set samba password for the default administrator user (usually use default administrator password on system/ssh `raspberry`):
 ```
-sudo smbpasswd -a pi
+sudo smbpasswd -a administrator
 ```
 
 #### Share a folder in Windows Network (SMB)
@@ -116,7 +116,7 @@ public = yes
 Enable permissions to folder:
 ```
 sudo mkdir /opt/compartido
-sudo chown pi:pi -R /opt/compartido
+sudo chown administrator:administrator -R /opt/compartido
 sudo chmod -R 777 /opt/compartido
 ```
 
@@ -134,7 +134,7 @@ sudo apt-get install -y xinetd
 
 Configurar el CUPS para administración remota:
 ```
-sudo usermod -aG lpadmin pi
+sudo usermod -aG lpadmin administrator
 sudo cupsctl --remote-admin
 ```
 
@@ -196,7 +196,7 @@ sudo apt-get install -y --no-install-recommends xserver-xorg xinit
 
 ### Openbox Window Manager 
 
-Este gestor de ventanas para XWindow es minimalista y ocupa solo 7MB de memoria, optimizado para dispositivos de baja capacidad como RaspberryPi. Una vez instalado el OpenBox se puede aplicar el tema `win10mod.obt` con la estética de Windows 10 para las ventanas.
+Este gestor de ventanas para XWindow es minimalista y ocupa solo 7MB de memoria, optimizado para dispositivos de baja capacidad equipos antiguos. Una vez instalado el OpenBox se puede aplicar el tema `win10mod.obt` con la estética de Windows 10 para las ventanas.
 ```
 sudo apt-get install -y openbox
 ```
@@ -214,8 +214,8 @@ sudo apt-get install -y xterm
 
 Una vez instalada podemos mejorar la consola ajustando colores y fuente de letra desde el siguiente archivo. 
 ```
-vi /home/pi/.Xresources
-vi /home/pi/.Xdefaults
+vi /home/administrator/.Xresources
+vi /home/administrator/.Xdefaults
 ```
 
 IMPORTANTE!! DEJAR un espacio al principio y al final del archivo!
@@ -267,9 +267,9 @@ I got it working using x11vnc rather than tightvncserver or vncserver
 sudo apt-get install -y xfonts-75dpi xfonts-100dpi
 ```
 
-This post set me on track. So first I connect to my PI using ssh
+This post set me on track. So first I connect to my computer using ssh
 ```
-ssh pi@rasperrypi
+ssh administrator@terminal
 ```
 
 Install x11vnc
@@ -290,8 +290,8 @@ x11vnc -usepw -repeat -shared -forever &
 
 La opción -repeat permite tener pulsada una tecla en remoto por repetición.
 
-Se puede poner el comando `x11vnc &` directamente en OpenBox `/home/pi/.config/openbox/autostart.sh`
-Now on my Mac I open the Finder and hit CMD + K and connect to my raspberrypi using vnc://raspberrypi
+Se puede poner el comando `x11vnc &` directamente en OpenBox `/home/administrator/.config/openbox/autostart.sh`
+Now on my Mac I open the Finder and hit CMD + K and connect to my computer using vnc://XXX.XXX.XXX.XXX
 
 Find Out VNC Port
 
@@ -353,14 +353,14 @@ Debian booting into GUI
 sudo apt-get install -y slim
 ```
 
-Configurar SLIM para entrar directamente con usuario por defecto `pi`: 
+Configurar SLIM para entrar directamente con usuario por defecto `administrator`: 
 ```
 sudo vi /etc/slim.conf
 ```
 ```
 # default user, leave blank or remove this line
 # for avoid pre-loading the username.
-default_user        pi
+default_user        administrator
 
 # Automatically login the default user (without entering
 # the password. Set to "yes" to enable this feature
@@ -379,7 +379,7 @@ Asegurarse que aceleracion 2D y 3D y mermoria grafica a 128MB para sporte OpenGL
 
 Agregar al usuario actual al sistema de montaje para acceder a la carpeta compartida:
 ```
-sudo adduser pi vboxsf
+sudo adduser administrator vboxsf
 ```
 
 ## GTK2/GTK3
@@ -413,7 +413,7 @@ cp Flat-Remix /user/share/icons/
 
 ### OpenBox Setup
 
-Configuracion de keyboard de `/home/pi/.config/openbox/rc.xml` para OpenBox y establecer la configuracion minima optimizada:
+Configuracion de keyboard de `/home/administrator/.config/openbox/rc.xml` para OpenBox y establecer la configuracion minima optimizada:
 
 ```
   <keyboard>
@@ -472,7 +472,7 @@ Configuracion de keyboard de `/home/pi/.config/openbox/rc.xml` para OpenBox y es
 
 Las inicializaciones se puede incorporar al archivo `.xinitrc`. Configuration de OpenBox permite mediante un archivo ejecutar automáticamente scripts y programas para preparar el entorno gráfico antes de inicializarlo.
 
-El archivo `/home/pi/.config/openbox/autostart.sh` contiene todos los comandos que se ejecutaran automáticamente al iniciar sesión una vez OpenBox se haya inicializado:
+El archivo `/home/administrator/.config/openbox/autostart.sh` contiene todos los comandos que se ejecutaran automáticamente al iniciar sesión una vez OpenBox se haya inicializado:
 
 ```
 # Openbox autostart.sh
@@ -528,7 +528,7 @@ wmctrl -k on
 
 #### Metodo 1. Crear una archivo para realizar el intercambio (swap) de las teclas CTRL con CMD (WIN).
 ```
-vi /home/pi/.Xmodmap
+vi /home/administrator/.Xmodmap
 ```
 ```
 remove control = Control_L
@@ -539,7 +539,7 @@ add control = Control_L
 add mod4 = Super_L
 ```
 
-El archivo se carga cada vez que se inicie el sistema en `/home/pi/.config/openbox/autoload.sh`
+El archivo se carga cada vez que se inicie el sistema en `/home/administrator/.config/openbox/autoload.sh`
 
 ```
 # keyboard swap ctrl-cmd
@@ -610,7 +610,7 @@ Tint2 nos facilita una barra de tareas donde se mostraran las ventanas abiertas 
 sudo apt-get install -y tint2
 ```
 
-Mediante Tint2 podemos configurar diferentes iconos para lanzar aplicaciones, con el archivo `/home/pi/.config/tint2/tint2rc`.
+Mediante Tint2 podemos configurar diferentes iconos para lanzar aplicaciones, con el archivo `/home/administrator/.config/tint2/tint2rc`.
 
 ```
 # Tint2 config file
@@ -750,7 +750,7 @@ fc-cache -f; sudo fc-cache -f
 ``` 
  
 ```
->> /home/pi/.config/fontconfig/fonts.conf
+>> /home/administrator/.config/fontconfig/fonts.conf
 <?xml version='1.0'?>
 <!DOCTYPE fontconfig SYSTEM 'fonts.dtd'>
 <fontconfig>
