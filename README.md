@@ -1,4 +1,4 @@
-## Thin Client (PC Intel x64 / Debian 8)
+## Thin Client (PC Intel x64 / Debian 8 / Xubuntu 16.04)
 
 ### Base System
 
