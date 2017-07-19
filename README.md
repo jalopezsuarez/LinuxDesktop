@@ -249,7 +249,7 @@ XTerm*geometry: 100x30
 XTerm*VT100.Translations: #override \
                  Ctrl<Key>V:insert-selection(CLIPBOARD) \n\
                  Ctrl<Key>C:copy-selection(CLIPBOARD) \n\
-                 Ctrl<Key>X:string(0x03)
+                 <Key>Esc:string(0x03)
 
 ```
 
@@ -560,9 +560,6 @@ The `~/.xinitrc`, `~/.xsessionrc` file is located in your home directory and it 
 # ~/.xsessionrc
 #
 # Executed by startx (run your window manager from here)
-
-# Exposee task-switcher for X11
-skippy-xd --start-daemon 
 
 # Keyboard AppleLayout
 setxkbmap -option altwin:ctrl_win
