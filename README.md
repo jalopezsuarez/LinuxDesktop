@@ -525,6 +525,40 @@ synclient VertScrollDelta=-235
 x11vnc -usepw -repeat -shared -forever &
 ```
 
+### Touch Gestures MacBook TouchPad
+
+Install Touchégg and enable OS-X like gestures
+```
+sudoapt-get install touchegg
+https://github.com/JoseExposito/touchegg
+```
+
+```
+<touchégg>
+    
+    <settings>
+        <property name="composed_gestures_time">0</property>
+    </settings>
+
+    <application name="All">
+            
+        <gesture type="TAP" fingers="3" direction="">
+            <action type="MOUSE_CLICK">BUTTON=3</action>
+        </gesture>
+		        
+        <gesture type="DRAG" fingers="3" direction="LEFT">
+            <action type="SEND_KEYS">Alt+Control+Left</action>
+        </gesture>
+        
+        <gesture type="DRAG" fingers="3" direction="RIGHT">
+            <action type="SEND_KEYS">Alt+Control+Right</action>
+        </gesture>
+
+    </application>
+
+</touchégg>
+```
+
 ### Minimize All-Window Command
 
 ```
