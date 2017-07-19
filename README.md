@@ -561,13 +561,19 @@ The `~/.xinitrc`, `~/.xsessionrc` file is located in your home directory and it 
 #
 # Executed by startx (run your window manager from here)
 
+# Exposee task-switcher for X11
+skippy-xd --start-daemon 
+
 # Keyboard AppleLayout
 setxkbmap -option altwin:ctrl_win
 
 # Touchpad NaturalScroll
 synclient VertScrollDelta=-235
 
-# VNC Server (se pueden meter otros servicios de inicio automatico)
+# Touchpad Gestures
+touchegg &
+
+# VNC Server
 x11vnc -usepw -repeat -shared -forever &
 ```
 
