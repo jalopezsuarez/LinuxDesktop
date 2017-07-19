@@ -66,6 +66,18 @@ Cuando se inserte un pendrive o una unidad USB en el equipo, este se montara aut
 sudo apt-get install -y usbmount ntfs-3g exfat-fuse
 ```
 
+To format a exFAT partition:
+```
+sudo mkfs.exfat -n LABEL /dev/sdXn
+```
+
+### Gestion de Discos (EXFat)
+
+Gnomne Partition Manager (GNOME GKT+) `Gparted`. El mejor gestor de particiones para Linux interfaz front-end del gestor `parted` de linea de comando:
+```
+sudo apt-get install -y gparted
+```
+
 ### SAMBA 
 Share directories as Network Shared Folder using Windows SMB standard. Install Samba PC (Debian / Xubuntu).
 ```
@@ -551,6 +563,14 @@ xmodmap .Xmodmap &
 ```
 # Keyboard AppleLayout
 setxkbmap -option altwin:ctrl_win
+```
+
+### MacbookPro Function-Keys
+
+Por defecto las telcas de funcion `Fn` vienen activas, para desactivarlas y usar `F1...F12`:
+```
+echo options hid_apple fnmode=2 | sudo tee -a /etc/modprobe.d/hid_apple.conf
+sudo update-initramfs -u -k all
 ```
 
 ## System Utilities Tools
