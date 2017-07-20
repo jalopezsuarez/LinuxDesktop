@@ -136,6 +136,9 @@ Permitir acceso a los archivos creados desde SMB:
 ```
 sudo groupadd nobody
 sudo usermod -a -G nobody administrator
+
+sudo groupadd nogroup
+sudo usermod -a -G nogroup administrator
 ```
 
 ### Impresoras Protocolo LPD/LPR
@@ -674,10 +677,9 @@ https://github.com/JoseExposito/touchegg
 ### MacOS Keyboard Shortcuts 
 
 MacOS Keybaord Shorcuts style:
-
-```
-deepin-scrot				>>	Shift+Ctrl+$
-skippy-xd --toggle-window-picker	>>	Ctrl+Tab
+|`/bin/rm -rf /home/administrator/.local/share/Trash/files/`|`Shift+Ctrl+Alt+BackSpace`|
+|`deepin-scrot`|`Shift+Ctrl+$`|
+|`skippy-xd --toggle-window-picker`|`Ctrl+Tab`|
 ```
 
 ### Minimize All-Window Command
