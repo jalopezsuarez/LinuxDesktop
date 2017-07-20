@@ -612,8 +612,6 @@ cerebro
 The `~/.xinitrc`, `~/.xsessionrc` file is located in your home directory and it is a hidden file. Here is an example of a default ~/.xsessionrc file: 
 
 ```
-#!/bin/bash
-#
 # ~/.xsessionrc
 #
 # Executed by startx (run your window manager from here)
@@ -629,6 +627,9 @@ touchegg &
 
 # VNC Server
 x11vnc -usepw -repeat -shared -forever &
+
+# Task Switcher for X11
+(sleep 5 && skippy-xd --start-daemon) &
 ```
 
 ### Touch Gestures MacBook TouchPad
