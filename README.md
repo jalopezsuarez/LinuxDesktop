@@ -600,7 +600,7 @@ https://github.com/JoseExposito/touchegg
         </gesture>
 
         <gesture type="DRAG" fingers="3" direction="UP">
-            <action type="RUN_COMMAND">skippy-xd --toggle-window-picker </action>
+            <action type="RUN_COMMAND">skippy-xd --toggle-window-picker</action>
         </gesture>
 
     </application>
