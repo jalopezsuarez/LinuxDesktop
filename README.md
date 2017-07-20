@@ -591,24 +591,16 @@ https://github.com/JoseExposito/touchegg
 
     <application name="All">
             
-        <gesture type="TAP" fingers="3" direction="">
-            <action type="MOUSE_CLICK">BUTTON=3</action>
-        </gesture>
-		        
         <gesture type="DRAG" fingers="3" direction="LEFT">
-            <action type="SEND_KEYS">Alt+Control+Right</action>
+            <action type="CHANGE_DESKTOP">NEXT</action>
         </gesture>
         
         <gesture type="DRAG" fingers="3" direction="RIGHT">
-            <action type="SEND_KEYS">Alt+Control+Left</action>
+            <action type="CHANGE_DESKTOP">PREVIOUS</action>
         </gesture>
 
         <gesture type="DRAG" fingers="3" direction="UP">
-            <action type="SEND_KEYS">Control+Tab</action>
-        </gesture>
-
-        <gesture type="DRAG" fingers="3" direction="DOWN">
-            <action type="SEND_KEYS">Control+Tab</action>
+            <action type="RUN_COMMAND">skippy-xd --toggle-window-picker </action>
         </gesture>
 
     </application>
