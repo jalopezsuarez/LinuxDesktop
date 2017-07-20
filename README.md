@@ -317,6 +317,63 @@ mkdir -p ~/.config/skippy-xd
 cp skippy-xd.sample.rc ~/.config/skippy-xd/skippy-xd.rc
 ```
 
+Ejemplo de configuracion:
+
+```
+[general]
+distance = 50
+useNetWMFullscreen = false
+ignoreSkipTaskbar = true
+updateFreq = 10.0
+lazyTrans = false
+pipePath = /tmp/skippy-xd-fifo
+movePointerOnStart = false
+movePointerOnSelect = false
+movePointerOnRaise = false
+switchDesktopOnActivate = false
+useNameWindowPixmap = false
+forceNameWindowPixmap = false
+includeFrame = true
+allowUpscale = false
+showAllDesktops = false
+showUnmapped = true
+preferredIconSize = 48
+clientDisplayModes = thumbnail icon filled none
+iconFillSpec = orig mid mid #00FFFF
+fillSpec = orig mid mid #FFFFFF
+background =
+
+[xinerama]
+showAll = true
+
+[normal]
+tint = #FFFFFF
+tintOpacity = 0
+opacity = 235
+
+[highlight]
+tint = #FFFFFF
+tintOpacity = 0
+opacity = 255
+
+[tooltip]
+show = false
+followsMouse = true
+offsetX = 20
+offsetY = 20
+align = left
+border = #404040
+background = #404040
+opacity = 128
+text = #FFFFFF
+textShadow = black
+font = fixed-11:weight=bold
+
+[bindings]
+miwMouse1 = focus
+miwMouse2 = focus
+miwMouse3 = destroy
+```
 
 ### VNC Server
 
