@@ -677,11 +677,12 @@ https://github.com/JoseExposito/touchegg
 ### MacOS Keyboard Shortcuts 
 
 MacOS Keybaord Shorcuts style:
-| Command | Shortcut
-| ------------ | ------------  
-`/bin/rm -rf /home/administrator/.local/share/Trash/files/`|`Shift+Ctrl+Alt+BackSpace`
-`deepin-scrot`|`Shift+Ctrl+$`
-`skippy-xd --toggle-window-picker`|`Ctrl+Tab`
+
+Command  | Shortcut
+-------- | --------  
+`/bin/rm -rf /home/administrator/.local/share/Trash/files/` | `Shift+Ctrl+Alt+BackSpace`
+`deepin-scrot` | `Shift+Ctrl+$`
+`skippy-xd --toggle-window-picker` | `Ctrl+Tab`
 
 ### Minimize All-Window Command
 
