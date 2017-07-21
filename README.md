@@ -82,13 +82,6 @@ Modify Samba configuration adding this options to default settings:
 sudo cp /etc/samba/smb.conf /etc/samba/smb.conf.bak
 sudo vi /etc/samba/smb.conf
 ```
-```
-[global]
-netbios name = terminal
-workgroup = WORKGROUP
-wins support = yes
-usershare allow guests = no
-```
 
 Set samba password for the default administrator user (usually use default administrator password on system/ssh `raspberry`):
 ```
@@ -105,7 +98,8 @@ workgroup = WORKGROUP
 wins support = yes
 usershare allow guests = yes
 map to guest = bad user
-guest account = nobody
+guest account = administrator
+guest group = administrator
 
 [compartido]
 comment = compartido
@@ -134,16 +128,11 @@ sudo groupadd nogroup
 sudo usermod -a -G nogroup administrator
 ```
 
-### Impresoras Protocolo LPD/LPR
+### Impresoras Configuracion
 
 Instalar el sistema CUPS para la gestion de impresoras:
 ```
 sudo apt-get install -y cups libcups2-dev libcupsimage2 libcupsimage2-dev
-```
-
-La plataforma `xinetd.d` ayudara para la publicación de servicios TCP/IP desde el terminal y asi poder acceder a las impresoras configuradas de forma remota:
-```
-sudo apt-get install -y xinetd
 ```
 
 Configurar el CUPS para administración remota:
@@ -160,6 +149,13 @@ En el archivo  `/etc/cups/cupsd.conf` cambiar en TODOS los bloques que contengan
   Allow @LOCAL
   Allow all
 </Location>
+```
+
+### Impresion Network Protocolo LPD/LPR
+
+La plataforma `xinetd.d` ayudara para la publicación de servicios TCP/IP desde el terminal y asi poder acceder a las impresoras configuradas de forma remota:
+```
+sudo apt-get install -y xinetd
 ```
 
 Publicar la impresora por protocolo LPD/LPR:
@@ -218,6 +214,87 @@ sudo apt-get install -y openbox
 Para iniciar XWindow manualmente utilizar el siguiente comando:
 ```
 startx
+```
+
+### OpenBox Setup
+
+Configuracion de keyboard de `/home/administrator/.config/openbox/rc.xml` para OpenBox y establecer la configuracion minima optimizada:
+
+```
+  <keyboard>
+    <chainQuitKey>C-g</chainQuitKey>
+    <!-- Customize Keybindings -->
+    <keybind key="C-w">
+      <action name="Close"/>
+    </keybind>    
+    <keybind key="C-Tab">
+      <action name="NextWindow"> 
+        <finalactions>
+          <action name="Focus"/>
+          <action name="Raise"/>
+          <action name="Unshade"/>
+        </finalactions>
+      </action>
+    </keybind>
+    <keybind key="C-S-Tab">
+      <action name="PreviousWindow">
+        <finalactions>
+          <action name="Focus"/>
+          <action name="Raise"/>
+          <action name="Unshade"/>
+        </finalactions>
+      </action>
+    </keybind>        
+    <keybind key="W-Right">
+      <action name="DesktopRight">
+        <wrap>no</wrap>
+      </action>
+    </keybind>
+    <keybind key="W-Left">
+      <action name="DesktopLeft">
+        <wrap>no</wrap>
+      </action>
+    </keybind>
+    <keybind key="W-Up">
+      <action name="DesktopRight">
+        <wrap>no</wrap>
+      </action>
+    </keybind>
+    <keybind key="W-Down">
+      <action name="DesktopLeft">
+        <wrap>no</wrap>
+      </action>
+    </keybind>     
+    <keybind key="C-S-4">
+      <action name="Execute">
+        <command>deepin-scrot</command>
+      </action>
+    </keybind>
+  </keyboard>
+```
+
+### OpenBox Autoinicio
+
+Las inicializaciones se puede incorporar al archivo `.xinitrc`. Configuration de OpenBox permite mediante un archivo ejecutar automáticamente scripts y programas para preparar el entorno gráfico antes de inicializarlo.
+
+El archivo `/home/administrator/.config/openbox/autostart.sh` contiene todos los comandos que se ejecutaran automáticamente al iniciar sesión una vez OpenBox se haya inicializado:
+
+```
+# Openbox autostart.sh
+# Programs that will run after Openbox has started
+
+# Keyboard Swap Ctrl-Cmd
+xmodmap .Xmodmap &
+
+# VNC Server
+x11vnc -usepw -repeat -shared -forever &
+
+# Windows Envoronment
+dbus-launch pcmanfm --desktop &
+tint2 &
+
+# Cerebro Spoolight
+cerebro
 ```
 
 ### SLiM login manager 
@@ -333,47 +410,6 @@ Conectar al puerto VNC:
 vnc://127.0.0.1:5900
 ```
 
-### Java and Maven Development Tools
-
-Linux Java Virtual Machine (32/64bits)
-
-```
-jdk-8u101-linux-arm32-vfp-hflt.tar.gz
-sudo mkdir /usr/lib/jvm
-mv jdk-8u101-linux-arm32-vfp-hflt.tar.gz /usr/lib/jvm
-tar zxvf jdk-8u101-linux-arm32-vfp-hflt.tar.gz
-mv *** jdk8
-```
-
-1. Download the Binary tar.gz version the maven website. Pick the latest version `wget`
-
-```
-wget https://archive.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
-```
-
-2. Extract the archive and install on `/usr/lib/mvn/maven3`
-
-```
-sudo mkdir /usr/lib/mvn
-sudo tar zxvf apache-maven-3.3.9-bin.tar.gz
-sudo mv apache-maven-3.3.9 /usr/lib/mvn/maven3
-```
-
-4. Install on system using global vars. At the end of the archive: `/etc/bash.bashrc`
-
-```
-# Tell shell where to find java on system profile settings available to all users
-export JAVA_HOME=/usr/lib/jvm/jdk8
-export PATH=$PATH:$JAVA_HOME/bin
-```
-
-```
-# Tell shell where to find java and maven on system profile settings available to all users
-export M2_HOME=/usr/lib/mvn/maven3
-export JAVA_HOME=/usr/lib/jvm/jdk8
-export PATH=$PATH:$JAVA_HOME/bin:$M2_HOME/bin
-```
-
 ## GTK2/GTK3
 
 Utilidad para gestion de temas lxappearance para GTK2/3. Instalar con la utilidad lxappearence o usar la propia del XFCE.
@@ -401,87 +437,6 @@ Iconos de sistema colecciocn FlatRemix
 ```
 git clone https://github.com/daniruiz/Flat-Remix.git
 cp Flat-Remix /user/share/icons/
-```
-
-### OpenBox Setup
-
-Configuracion de keyboard de `/home/administrator/.config/openbox/rc.xml` para OpenBox y establecer la configuracion minima optimizada:
-
-```
-  <keyboard>
-    <chainQuitKey>C-g</chainQuitKey>
-    <!-- Customize Keybindings -->
-    <keybind key="C-w">
-      <action name="Close"/>
-    </keybind>    
-    <keybind key="C-Tab">
-      <action name="NextWindow"> 
-        <finalactions>
-          <action name="Focus"/>
-          <action name="Raise"/>
-          <action name="Unshade"/>
-        </finalactions>
-      </action>
-    </keybind>
-    <keybind key="C-S-Tab">
-      <action name="PreviousWindow">
-        <finalactions>
-          <action name="Focus"/>
-          <action name="Raise"/>
-          <action name="Unshade"/>
-        </finalactions>
-      </action>
-    </keybind>        
-    <keybind key="W-Right">
-      <action name="DesktopRight">
-        <wrap>no</wrap>
-      </action>
-    </keybind>
-    <keybind key="W-Left">
-      <action name="DesktopLeft">
-        <wrap>no</wrap>
-      </action>
-    </keybind>
-    <keybind key="W-Up">
-      <action name="DesktopRight">
-        <wrap>no</wrap>
-      </action>
-    </keybind>
-    <keybind key="W-Down">
-      <action name="DesktopLeft">
-        <wrap>no</wrap>
-      </action>
-    </keybind>     
-    <keybind key="C-S-4">
-      <action name="Execute">
-        <command>deepin-scrot</command>
-      </action>
-    </keybind>
-  </keyboard>
-```
-
-### OpenBox Autoinicio
-
-Las inicializaciones se puede incorporar al archivo `.xinitrc`. Configuration de OpenBox permite mediante un archivo ejecutar automáticamente scripts y programas para preparar el entorno gráfico antes de inicializarlo.
-
-El archivo `/home/administrator/.config/openbox/autostart.sh` contiene todos los comandos que se ejecutaran automáticamente al iniciar sesión una vez OpenBox se haya inicializado:
-
-```
-# Openbox autostart.sh
-# Programs that will run after Openbox has started
-
-# Keyboard Swap Ctrl-Cmd
-xmodmap .Xmodmap &
-
-# VNC Server
-x11vnc -usepw -repeat -shared -forever &
-
-# Windows Envoronment
-dbus-launch pcmanfm --desktop &
-tint2 &
-
-# Cerebro Spoolight
-cerebro
 ```
 
 ### Autostart Apps XWindow (Metodo oficial)
@@ -704,11 +659,45 @@ miwMouse2 = focus
 miwMouse3 = destroy
 ```
 
-### Gestion de Discos (EXFat)
+### Java and Maven Development Tools
 
-Gnomne Partition Manager (GNOME GKT+) `Gparted`. El mejor gestor de particiones para Linux interfaz front-end del gestor `parted` de linea de comando:
+Linux Java Virtual Machine (32/64bits)
+
 ```
-sudo apt-get install -y gparted
+jdk-8u101-linux-arm32-vfp-hflt.tar.gz
+sudo mkdir /usr/lib/jvm
+mv jdk-8u101-linux-arm32-vfp-hflt.tar.gz /usr/lib/jvm
+tar zxvf jdk-8u101-linux-arm32-vfp-hflt.tar.gz
+mv *** jdk8
+```
+
+1. Download the Binary tar.gz version the maven website. Pick the latest version `wget`
+
+```
+wget https://archive.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
+```
+
+2. Extract the archive and install on `/usr/lib/mvn/maven3`
+
+```
+sudo mkdir /usr/lib/mvn
+sudo tar zxvf apache-maven-3.3.9-bin.tar.gz
+sudo mv apache-maven-3.3.9 /usr/lib/mvn/maven3
+```
+
+4. Install on system using global vars. At the end of the archive: `/etc/bash.bashrc`
+
+```
+# Tell shell where to find java on system profile settings available to all users
+export JAVA_HOME=/usr/lib/jvm/jdk8
+export PATH=$PATH:$JAVA_HOME/bin
+```
+
+```
+# Tell shell where to find java and maven on system profile settings available to all users
+export M2_HOME=/usr/lib/mvn/maven3
+export JAVA_HOME=/usr/lib/jvm/jdk8
+export PATH=$PATH:$JAVA_HOME/bin:$M2_HOME/bin
 ```
 
 ### VirtualBox Guest Additions
@@ -996,6 +985,13 @@ sudo apt-get install -y autopoint libvte-2.91-dev libconfuse-dev
 sudo make install
 ```
 
+### Gestion de Discos (EXFat)
+
+Gnomne Partition Manager (GNOME GKT+) `Gparted`. El mejor gestor de particiones para Linux interfaz front-end del gestor `parted` de linea de comando:
+```
+sudo apt-get install -y gparted
+```
+
 ### Navegadores Internet Browsers
 
 Google Chrome
@@ -1016,12 +1012,13 @@ sudo apt-get update
 sudo apt-get install -y firefox
 ```
 
-### Eclipse
+### Apliaciones / Utilidades
+Eclipse
 ```
 /opt/eclipse
 ```
 
-### Printed Circuit Board Layout Tool (PCB)
+Printed Circuit Board Layout Tool (PCB)
 ```
 https://sourceforge.net/projects/pcb/?source=typ_redirect
 ```
