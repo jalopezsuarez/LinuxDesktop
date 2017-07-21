@@ -220,6 +220,27 @@ Para iniciar XWindow manualmente utilizar el siguiente comando:
 startx
 ```
 
+### SLiM login manager 
+
+Debian booting into GUI
+```
+sudo apt-get install -y slim
+```
+
+Configurar SLIM para entrar directamente con usuario por defecto `administrator`: 
+```
+sudo vi /etc/slim.conf
+```
+```
+# default user, leave blank or remove this line
+# for avoid pre-loading the username.
+default_user        administrator
+
+# Automatically login the default user (without entering
+# the password. Set to "yes" to enable this feature
+auto_login          yes
+```
+
 ### XTerminal System
 Installation de la consola box en modo grafico Xterm:
 ```
@@ -244,15 +265,8 @@ XTerm*selectToClipboard: true
 XTerm*geometry: 100x30
 XTerm*VT100.Translations: #override \
                  Ctrl<Key>V:insert-selection(CLIPBOARD) \n\
-                 Ctrl<Key>C:copy-selection(CLIPBOARD) \n\
-                 <Key>Esc:string(0x03)
+                 Ctrl<Key>C:string(0x03) 
 
-```
-
-Al modificar la configuracion se puede recargar usando:
-```
-sudo apt-get install -y xrdp
-xrdb -merge ~/.Xresources
 ```
 
 Configurar XTerm como terminal de consola por defecto:
@@ -272,103 +286,6 @@ mode
   4            /usr/bin/xterm        20        manual mode
 
 Press enter to keep the current choice[*], or type selection number: 4
-```
-
-### Exposee Task Switcher (Simple)
-
-A full-screen Exposé-style standalone task switcher for X11. It's most commonly known by Mac OS X's name for it - Exposé.
-Skippy-XD — a full-screen task-switcher for X11.
-
-```
-sudo apt-get install -y libgif-dev
-git clone https://github.com/richardgv/skippy-xd.git
-```
-
-To run the daemon, use the following command: 
-```
-skippy-xd --start-daemon 
-```
-
-If for whatever reason you need to cleanly stop the running daemon, do this: 
-```
-skippy-xd --stop-daemon 
-```
-
-Once the daemon is running you can use the following command to activate it: 
-```
-skippy-xd --activate-window-picker
-skippy-xd --toggle-window-picker 
-```
-
-However, sometimes pressing the Return key to run this last command also causes the window to be selected, so it is probably more effective in testing to do this: 
-```
-sleep 1 && skippy-xd --activate-window-picker 
-```
-This will wait 1 second, then activate the picker.
-
-Configuracion:
-
-```
-mkdir -p ~/.config/skippy-xd
-cp skippy-xd.sample.rc ~/.config/skippy-xd/skippy-xd.rc
-```
-
-Ejemplo de configuracion:
-
-```
-[general]
-distance = 50
-useNetWMFullscreen = false
-ignoreSkipTaskbar = true
-updateFreq = 10.0
-lazyTrans = false
-pipePath = /tmp/skippy-xd-fifo
-movePointerOnStart = false
-movePointerOnSelect = false
-movePointerOnRaise = false
-switchDesktopOnActivate = false
-useNameWindowPixmap = false
-forceNameWindowPixmap = false
-includeFrame = true
-allowUpscale = false
-showAllDesktops = false
-showUnmapped = true
-preferredIconSize = 48
-clientDisplayModes = thumbnail icon filled none
-iconFillSpec = orig mid mid #00FFFF
-fillSpec = orig mid mid #FFFFFF
-background =
-
-[xinerama]
-showAll = true
-
-[normal]
-tint = #FFFFFF
-tintOpacity = 0
-opacity = 235
-
-[highlight]
-tint = #FFFFFF
-tintOpacity = 0
-opacity = 255
-
-[tooltip]
-show = false
-followsMouse = true
-offsetX = 20
-offsetY = 20
-align = left
-border = #404040
-background = #404040
-opacity = 128
-text = #FFFFFF
-textShadow = black
-font = fixed-11:weight=bold
-
-[bindings]
-miwMouse1 = focus
-miwMouse2 = focus
-miwMouse3 = destroy
 ```
 
 ### VNC Server
@@ -455,49 +372,6 @@ export PATH=$PATH:$JAVA_HOME/bin
 export M2_HOME=/usr/lib/mvn/maven3
 export JAVA_HOME=/usr/lib/jvm/jdk8
 export PATH=$PATH:$JAVA_HOME/bin:$M2_HOME/bin
-```
-
-### SLiM login manager 
-
-Debian booting into GUI
-```
-sudo apt-get install -y slim
-```
-
-Configurar SLIM para entrar directamente con usuario por defecto `administrator`: 
-```
-sudo vi /etc/slim.conf
-```
-```
-# default user, leave blank or remove this line
-# for avoid pre-loading the username.
-default_user        administrator
-
-# Automatically login the default user (without entering
-# the password. Set to "yes" to enable this feature
-auto_login          yes
-```
-
-### Gestion de Discos (EXFat)
-
-Gnomne Partition Manager (GNOME GKT+) `Gparted`. El mejor gestor de particiones para Linux interfaz front-end del gestor `parted` de linea de comando:
-```
-sudo apt-get install -y gparted
-```
-
-### VirtualBox Guest Additions
-
-Instalar los drivers para VirtualBox:
-```
-sudo apt-get install -y build-essential linux-headers-`uname -r` dkms
-```
-
-Desde VirtualBox montar el CDROM con los drivers. Copiar los drivers al disco para realizar la instalacion manualmente desde consola.
-Asegurarse que aceleracion 2D y 3D y mermoria grafica a 128MB para sporte OpenGL.
-
-Agregar al usuario actual al sistema de montaje para acceder a la carpeta compartida:
-```
-sudo adduser administrator vboxsf
 ```
 
 ## GTK2/GTK3
@@ -640,40 +514,6 @@ x11vnc -usepw -repeat -shared -forever &
 (sleep 5 && tilda) &
 ```
 
-### Touch Gestures MacBook TouchPad
-
-Install Touchégg and enable OS-X like gestures
-```
-sudoapt-get install touchegg
-https://github.com/JoseExposito/touchegg
-```
-
-```
-<touchégg>
-    
-    <settings>
-        <property name="composed_gestures_time">0</property>
-    </settings>
-
-    <application name="All">
-            
-        <gesture type="DRAG" fingers="3" direction="LEFT">
-            <action type="CHANGE_DESKTOP">NEXT</action>
-        </gesture>
-        
-        <gesture type="DRAG" fingers="3" direction="RIGHT">
-            <action type="CHANGE_DESKTOP">PREVIOUS</action>
-        </gesture>
-
-        <gesture type="DRAG" fingers="3" direction="UP">
-            <action type="RUN_COMMAND">skippy-xd --toggle-window-picker</action>
-        </gesture>
-
-    </application>
-
-</touchégg>
-```
-
 ### MacOS Keyboard Shortcuts 
 
 MacOS Keybaord Shorcuts style:
@@ -731,6 +571,159 @@ Por defecto las telcas de funcion `Fn` vienen activas, para desactivarlas y usar
 ```
 echo options hid_apple fnmode=2 | sudo tee -a /etc/modprobe.d/hid_apple.conf
 sudo update-initramfs -u -k all
+```
+
+### Touch Gestures MacBook TouchPad
+
+Install Touchégg and enable OS-X like gestures
+```
+sudoapt-get install touchegg
+https://github.com/JoseExposito/touchegg
+```
+
+```
+<touchégg>
+    
+    <settings>
+        <property name="composed_gestures_time">0</property>
+    </settings>
+
+    <application name="All">
+            
+        <gesture type="DRAG" fingers="3" direction="LEFT">
+            <action type="CHANGE_DESKTOP">NEXT</action>
+        </gesture>
+        
+        <gesture type="DRAG" fingers="3" direction="RIGHT">
+            <action type="CHANGE_DESKTOP">PREVIOUS</action>
+        </gesture>
+
+        <gesture type="DRAG" fingers="3" direction="UP">
+            <action type="RUN_COMMAND">skippy-xd --toggle-window-picker</action>
+        </gesture>
+
+    </application>
+
+</touchégg>
+```
+
+### Exposee Task Switcher (Simple)
+
+A full-screen Exposé-style standalone task switcher for X11. It's most commonly known by Mac OS X's name for it - Exposé.
+Skippy-XD — a full-screen task-switcher for X11.
+
+```
+sudo apt-get install -y libgif-dev
+git clone https://github.com/richardgv/skippy-xd.git
+```
+
+To run the daemon, use the following command: 
+```
+skippy-xd --start-daemon 
+```
+
+If for whatever reason you need to cleanly stop the running daemon, do this: 
+```
+skippy-xd --stop-daemon 
+```
+
+Once the daemon is running you can use the following command to activate it: 
+```
+skippy-xd --activate-window-picker
+skippy-xd --toggle-window-picker 
+```
+
+However, sometimes pressing the Return key to run this last command also causes the window to be selected, so it is probably more effective in testing to do this: 
+```
+sleep 1 && skippy-xd --activate-window-picker 
+```
+This will wait 1 second, then activate the picker.
+
+Configuracion:
+
+```
+mkdir -p ~/.config/skippy-xd
+cp skippy-xd.sample.rc ~/.config/skippy-xd/skippy-xd.rc
+```
+
+Ejemplo de configuracion:
+
+```
+[general]
+distance = 50
+useNetWMFullscreen = false
+ignoreSkipTaskbar = true
+updateFreq = 10.0
+lazyTrans = false
+pipePath = /tmp/skippy-xd-fifo
+movePointerOnStart = false
+movePointerOnSelect = false
+movePointerOnRaise = false
+switchDesktopOnActivate = false
+useNameWindowPixmap = false
+forceNameWindowPixmap = false
+includeFrame = true
+allowUpscale = false
+showAllDesktops = false
+showUnmapped = true
+preferredIconSize = 48
+clientDisplayModes = thumbnail icon filled none
+iconFillSpec = orig mid mid #00FFFF
+fillSpec = orig mid mid #FFFFFF
+background =
+
+[xinerama]
+showAll = true
+
+[normal]
+tint = #FFFFFF
+tintOpacity = 0
+opacity = 235
+
+[highlight]
+tint = #FFFFFF
+tintOpacity = 0
+opacity = 255
+
+[tooltip]
+show = false
+followsMouse = true
+offsetX = 20
+offsetY = 20
+align = left
+border = #404040
+background = #404040
+opacity = 128
+text = #FFFFFF
+textShadow = black
+font = fixed-11:weight=bold
+
+[bindings]
+miwMouse1 = focus
+miwMouse2 = focus
+miwMouse3 = destroy
+```
+
+### Gestion de Discos (EXFat)
+
+Gnomne Partition Manager (GNOME GKT+) `Gparted`. El mejor gestor de particiones para Linux interfaz front-end del gestor `parted` de linea de comando:
+```
+sudo apt-get install -y gparted
+```
+
+### VirtualBox Guest Additions
+
+Instalar los drivers para VirtualBox:
+```
+sudo apt-get install -y build-essential linux-headers-`uname -r` dkms
+```
+
+Desde VirtualBox montar el CDROM con los drivers. Copiar los drivers al disco para realizar la instalacion manualmente desde consola.
+Asegurarse que aceleracion 2D y 3D y mermoria grafica a 128MB para sporte OpenGL.
+
+Agregar al usuario actual al sistema de montaje para acceder a la carpeta compartida:
+```
+sudo adduser administrator vboxsf
 ```
 
 ## System Utilities Tools
