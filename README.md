@@ -71,13 +71,6 @@ To format a exFAT partition:
 sudo mkfs.exfat -n LABEL /dev/sdXn
 ```
 
-### Gestion de Discos (EXFat)
-
-Gnomne Partition Manager (GNOME GKT+) `Gparted`. El mejor gestor de particiones para Linux interfaz front-end del gestor `parted` de linea de comando:
-```
-sudo apt-get install -y gparted
-```
-
 ### SAMBA 
 Share directories as Network Shared Folder using Windows SMB standard. Install Samba PC (Debian / Xubuntu).
 ```
@@ -483,6 +476,13 @@ default_user        administrator
 # Automatically login the default user (without entering
 # the password. Set to "yes" to enable this feature
 auto_login          yes
+```
+
+### Gestion de Discos (EXFat)
+
+Gnomne Partition Manager (GNOME GKT+) `Gparted`. El mejor gestor de particiones para Linux interfaz front-end del gestor `parted` de linea de comando:
+```
+sudo apt-get install -y gparted
 ```
 
 ### VirtualBox Guest Additions
