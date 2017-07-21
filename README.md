@@ -717,54 +717,6 @@ sudo adduser administrator vboxsf
 
 ## System Utilities Tools
 
-### PCManFM System File Browser
-
-```
-sudo apt-get install --no-install-recommends gvfs-backends gvfs-fuse
-```
-
-Compilacion manual del PCManFM:
-
-```
-https://blog.lxde.org/category/pcmanfm/
-https://sourceforge.net/projects/pcmanfm/
-```
-
-```
-tar xvf libfm-1.2.5.tar.xz
-cd libfm-1.2.5
-./configure
-sudo make install
-```  
-```
-tar xvf pcmanfm-1.2.5.tar
-cd pcmanfm-1.2.5
-./configure
-sudo make install
-```
-
-Fondo de escritorio. Cuando se ejecuta PCManFM en modo desktop:
-```
-pcmanfm --desktop
-```
-
-Se puede asignar una imagen de escritorio. Esta se copia en recursos/shared de imagenes de GTK:
-
-```
-mkdir /usr/share/wallpapers
-cp background.jpg /usr/share/wallpapers
-```
-
-### FSearch Busqueda en Sistema
-
-A fast file search utility for Unix-like systems based on GTK+3
-```
-http://www.fsearch.org
-git clone https://github.com/cboxdoerfer/fsearch.git
-./configure
-sudo make install
-```
-
 ### Tint2 TaskBar
 Tint2 nos facilita una barra de tareas donde se mostraran las ventanas abiertas del sistema de ventanas.
 
@@ -894,6 +846,67 @@ launcher_icon_size = 24
 # End of config
 ```
 
+### PCManFM System File Browser
+
+```
+sudo apt-get install --no-install-recommends gvfs-backends gvfs-fuse
+```
+
+Compilacion manual del PCManFM:
+
+```
+https://blog.lxde.org/category/pcmanfm/
+https://sourceforge.net/projects/pcmanfm/
+```
+
+```
+tar xvf libfm-1.2.5.tar.xz
+cd libfm-1.2.5
+./configure
+sudo make install
+```  
+```
+tar xvf pcmanfm-1.2.5.tar
+cd pcmanfm-1.2.5
+./configure
+sudo make install
+```
+
+Fondo de escritorio. Cuando se ejecuta PCManFM en modo desktop:
+```
+pcmanfm --desktop
+```
+
+Se puede asignar una imagen de escritorio. Esta se copia en recursos/shared de imagenes de GTK:
+
+```
+mkdir /usr/share/wallpapers
+cp background.jpg /usr/share/wallpapers
+```
+
+### Tilda (Terminal DropDown)
+
+```
+https://github.com/lanoxx/tilda
+```
+
+```
+sudo apt-get install -y autopoint libvte-2.91-dev libconfuse-dev
+./autogen.sh
+./configure
+sudo make install
+```
+
+### FSearch Busqueda en Sistema
+
+A fast file search utility for Unix-like systems based on GTK+3
+```
+http://www.fsearch.org
+git clone https://github.com/cboxdoerfer/fsearch.git
+./configure
+sudo make install
+```
+
 ### Cerebro
 Busqueda directa y ejecucion de aplicaciones tipo Spotlight.
 ```
@@ -970,19 +983,6 @@ Visor de archivos de imagenes galeria
 ```
 http://siyanpanayotov.com/project/viewnior
 sudo apt-get install -y viewnior
-```
-
-### Tilda (Terminal DropDown)
-
-```
-https://github.com/lanoxx/tilda
-```
-
-```
-sudo apt-get install -y autopoint libvte-2.91-dev libconfuse-dev
-./autogen.sh
-./configure
-sudo make install
 ```
 
 ### Gestion de Discos (EXFat)
