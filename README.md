@@ -478,6 +478,7 @@ Command  | Shortcut
 `/bin/rm -rf /home/administrator/.local/share/Trash/files/` | `Shift+Ctrl+Alt+BackSpace`
 `deepin-scrot` | `Shift+Ctrl+$`
 `skippy-xd --toggle-window-picker` | `Ctrl+Tab`
+`xflock4` | `Shift+Ctrl+XF86Eject`
 
 ### Minimize All-Window Command
 
