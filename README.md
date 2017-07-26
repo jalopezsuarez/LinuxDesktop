@@ -102,8 +102,8 @@ guest account = administrator
 guest group = administrator
 
 [compartido]
-comment = compartido
-path = /opt/compartido
+comment = Compartido
+path = /opt/Compartido
 browseable = yes
 writeable = yes
 create mask = 0775
@@ -114,9 +114,9 @@ public = yes
 
 Enable permissions to folder:
 ```
-sudo mkdir /opt/compartido
-sudo chown administrator:administrator -R /opt/compartido
-sudo chmod -R 777 /opt/compartido
+sudo mkdir /opt/Compartido
+sudo chown administrator:administrator -R /opt/Compartido
+sudo chmod -R 777 /opt/Compartido
 ```
 
 Permitir acceso a los archivos creados desde SMB:
@@ -126,6 +126,18 @@ sudo usermod -a -G nobody administrator
 
 sudo groupadd nogroup
 sudo usermod -a -G nogroup administrator
+```
+
+### Fuentes Sistema
+
+Instalar las fuentes descargadas en la siguiente ruta:
+```
+/usr/local/share/fonts
+```
+
+Actualizar las fuentes instaladas en el sistema:
+```
+fc-cache -f -v
 ```
 
 ### Impresoras Configuracion
