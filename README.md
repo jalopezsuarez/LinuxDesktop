@@ -920,6 +920,13 @@ git clone https://github.com/cboxdoerfer/fsearch.git
 sudo make install
 ```
 
+### Buscador dentro de archivos
+
+Aplicacion que busca recursivamente muy potente dentro de archivos de texto y documentos:
+```
+sudo apt-get install sagasu
+```
+
 ### Cerebro
 Busqueda directa y ejecucion de aplicaciones tipo Spotlight.
 ```
