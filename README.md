@@ -1043,12 +1043,63 @@ Printed Circuit Board Layout Tool (PCB)
 https://sourceforge.net/projects/pcb/?source=typ_redirect
 ```
 
+### [Ubuntu 16.04] StrongSwan Connection Manager
+
+The solution is to build network-manager-strongswan from source. The commands to follow are:
+
+Get the strongSwan tarball
+```
+wget http://download.strongswan.org/strongswan-5.x.x.tar.bz2
+tar xjf strongswan-5.x.x.tar.bz2
+cd strongswan-5.x.x
+```
+
+Build charon with OpenSSL/NM Plugin
+```
+./configure --sysconfdir=/etc --prefix=/usr --libexecdir=/usr/lib \
+--disable-aes --disable-des --disable-md5 --disable-sha1 --disable-sha2 \
+--disable-fips-prf --disable-gmp --enable-openssl --enable-nm --enable-agent \
+--enable-eap-gtc --enable-eap-md5 --enable-eap-mschapv2 --enable-eap-identity
+make
+make install
+```
+
+Some of install directories:
+```
+/usr/lib/ipsec/
+/usr/share/strongswan
+/etc/strongswan.conf
+/etc/ipsec.d
+```
+
+
+Get the NetworkManager strongsSwan plugin as a tarball
+```
+wget http://download.strongswan.org/NetworkManager/NetworkManager-strongswan-1.x.x.tar.bz2
+tar xjf NetworkManager-strongswan-1.x.x.tar.bz2
+cd NetworkManager-strongswan-1.x.x
+```
+Build the NetworkManager strongsSwan plugin (if you changed prefix/libexecdir above, set --with-charon=/path/to/charon-nm)
+```
+./configure --sysconfdir=/etc --prefix=/usr --with-charon=/usr/lib/ipsec/charon-nm
+make
+make install
+```
+
+Some of install directories:
+```
+/usr/lib/x86_64-linux-gnu/NetworkManager
+/usr/lib/NetworkManager
+/etc/NetworkManager/VPN
+```
+
+Once installed, just launch the Ubuntu network manager, create a VPN and you will now see the option for a Strongswan VPN.
+
 ### Limpieza Sistema de Paquetes (APT-GET)
 After install all dependences libraries its recommended purge system:
 ```
 sudo apt-get -y autoremove --purge
 sudo apt-get autoclean
 sudo apt-get autoremove
-sudo apt-get clean
 sudo ldconfig
 ```
